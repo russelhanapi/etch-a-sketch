@@ -33,7 +33,7 @@ const generateRandomRgbColor = function () {
 
 const draw = function (e) {
   if (e.target.classList.contains('pixel')) {
-    const [r, g, b] = generateRandomRgbaColor();
+    const [r, g, b] = generateRandomRgbColor();
     e.target.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
   }
 };
