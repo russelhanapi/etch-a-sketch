@@ -20,9 +20,21 @@ const setNumOfSquare = function () {
   generatePixels(n);
 };
 
+const generateRandomInteger = function (max) {
+  return Math.floor(Math.random() * (max + 1));
+};
+
+const generateRandomRgbColor = function () {
+  let r = generateRandomInteger(255);
+  let g = generateRandomInteger(255);
+  let b = generateRandomInteger(255);
+  return [r, g, b];
+};
+
 const draw = function (e) {
   if (e.target.classList.contains('pixel')) {
-    e.target.style.backgroundColor = 'black';
+    const [r, g, b] = generateRandomRgbaColor();
+    e.target.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
   }
 };
 
