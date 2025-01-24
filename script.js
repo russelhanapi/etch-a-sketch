@@ -17,3 +17,11 @@ outerContainer.classList.add('outer-container');
 document.body.appendChild(outerContainer);
 
 generatePixels(16);
+
+const draw = function (e) {
+  if (e.target.classList.contains('pixel')) {
+    e.target.style.backgroundColor = 'black';
+  }
+};
+
+outerContainer.addEventListener('mouseover', draw);
