@@ -23,3 +23,14 @@
   flex-grow: 1;
   border: solid rgba(150, 150, 150, 0.322) 0.1px;
 }
+
+.btn-set-num-of-pixels {
+  height: 40px;
+  width: 800px;
+  padding: 12px;
+  font-size: 18px;
+  color: white;
+  font-weight: 600;
+  background-color: black;
+  cursor: pointer;
+}
