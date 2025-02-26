@@ -4,9 +4,22 @@
   box-sizing: border-box;
 }
 
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+
 .outer-container {
-  max-width: 800px;
-  height: 800px;
+  width: 40rem;
+  height: 40rem;
   border: solid black 4px;
   background-color: rgb(228, 228, 228);
   display: flex;
@@ -25,10 +38,8 @@
 }
 
 .btn-set-num-of-pixels {
-  height: 40px;
-  width: 800px;
-  padding: 12px;
-  font-size: 18px;
+  padding: 1.2rem;
+  font-size: 1.8rem;
   color: white;
   font-weight: 600;
   background-color: black;

@@ -53,16 +53,21 @@ const draw = function (e) {
 
 // *****************************************
 
+const container = document.createElement('div');
+container.classList.add('container');
+
 // Create a button to set the number of squares (grid size)
 const btnSetNumOfPixels = document.createElement('button');
 btnSetNumOfPixels.textContent = 'Set Number of Square';
 btnSetNumOfPixels.classList.add('btn-set-num-of-pixels');
-document.body.appendChild(btnSetNumOfPixels);
+container.appendChild(btnSetNumOfPixels);
 
 // Create the outer container to hold the pixel grid
 const outerContainer = document.createElement('div');
 outerContainer.classList.add('outer-container');
-document.body.appendChild(outerContainer);
+
+container.appendChild(outerContainer);
+document.body.appendChild(container);
 
 // Generate an initial 16x16 grid on page load
 generatePixels(16);
