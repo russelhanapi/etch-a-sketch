@@ -1,79 +1,97 @@
-// Function to generate a grid of pixel divs
-const generatePixels = function (n) {
-  for (let i = 0; i < n; i++) {
-    // Create a row container
-    const innerContainer = document.createElement('div');
-    innerContainer.classList.add('inner-container');
-    outerContainer.appendChild(innerContainer);
+// Select key DOM elements from the HTML
+const drawingScreen = document.querySelector('.drawing-screen');
+const clearButton = document.querySelector('.clear-button');
+const colorModeButton = document.querySelector('.color-mode');
+const blackModeButton = document.querySelector('.black-mode');
+const setGridSizeButton = document.querySelector('.button-set-grid-size');
 
-    for (let j = 0; j < n; j++) {
-      // Create individual pixel divs and add them to the row
-      const pixel = document.createElement('div');
-      pixel.classList.add('pixel');
-      innerContainer.appendChild(pixel);
-    }
-  }
-};
-
-// Function to prompt the user for grid size and regenerate the grid
-const setNumOfSquare = function () {
-  let n = Number(prompt('Enter number of pixels'));
-
-  // Ensure the input is a valid number between 1 and 99
-  while (isNaN(n) || n < 1 || n >= 100) {
-    n = Number(prompt('Input must be a positive number NOT greater than 100'));
-  }
-
-  // Clear the existing grid and generate a new one
-  outerContainer.innerHTML = '';
-  generatePixels(n);
-};
-
-// Function to generate a random integer between 0 and max
-const generateRandomInteger = function (max) {
-  return Math.floor(Math.random() * (max + 1));
-};
-
-// Function to generate a random RGB color
-const generateRandomRgbColor = function () {
-  let r = generateRandomInteger(255);
-  let g = generateRandomInteger(255);
-  let b = generateRandomInteger(255);
-  return [r, g, b];
-};
-
-// Function to change the color of a pixel on hover
-const draw = function (e) {
-  if (e.target.classList.contains('pixel')) {
-    // Generate a random color and apply it to the hovered pixel
-    const [r, g, b] = generateRandomRgbColor();
-    e.target.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
-  }
-};
-
-// *****************************************
-
-const container = document.createElement('div');
-container.classList.add('container');
-
-// Create a button to set the number of squares (grid size)
-const btnSetNumOfPixels = document.createElement('button');
-btnSetNumOfPixels.textContent = 'Set Number of Square';
-btnSetNumOfPixels.classList.add('btn-set-num-of-pixels');
-container.appendChild(btnSetNumOfPixels);
-
-// Create the outer container to hold the pixel grid
+// Create outer container inside the drawing screen
 const outerContainer = document.createElement('div');
 outerContainer.classList.add('outer-container');
+drawingScreen.appendChild(outerContainer);
 
-container.appendChild(outerContainer);
-document.body.appendChild(container);
+// ========== Drawing Logic ==========
 
-// Generate an initial 16x16 grid on page load
-generatePixels(16);
+// Generate a grid of pixel divs
+function generatePixels(n) {
+  for (let i = 0; i < n; i++) {
+    const row = document.createElement('div');
+    row.classList.add('inner-container');
+    outerContainer.appendChild(row);
 
-// Event listener to set a new grid size when the button is clicked
-btnSetNumOfPixels.addEventListener('click', setNumOfSquare);
+    for (let j = 0; j < n; j++) {
+      const pixel = document.createElement('div');
+      pixel.classList.add('pixel');
+      row.appendChild(pixel);
+    }
+  }
+}
 
-// Event listener to apply random colors on mouseover
+// Prompt user for grid size
+function setGridSize() {
+  let n;
+  do {
+    n = prompt('Enter grid size (max: 99):');
+    if (n === null) return; // If user cancels, exit the function
+    n = Number(n);
+  } while (isNaN(n) || n < 1 || n >= 100);
+
+  // Clear the container and generate pixels
+  outerContainer.innerHTML = '';
+  generatePixels(n);
+}
+
+// Generate a random integer between 0 and max
+function generateRandomInteger(max) {
+  return Math.floor(Math.random() * (max + 1));
+}
+
+// Generate a random RGB color
+function generateRandomRgbColor() {
+  const r = generateRandomInteger(255);
+  const g = generateRandomInteger(255);
+  const b = generateRandomInteger(255);
+  return `rgb(${r}, ${g}, ${b})`;
+}
+
+// Mode: 'black' or 'color'
+let currentMode = 'black';
+
+// Draw function triggered on hover
+function draw(e) {
+  if (!e.target.classList.contains('pixel')) return;
+
+  e.target.style.backgroundColor =
+    currentMode === 'color' ? generateRandomRgbColor() : '#000';
+}
+
+// ========== Event Listeners ==========
+
+// Drawing interaction
 outerContainer.addEventListener('mouseover', draw);
+
+// Clear button resets the grid
+clearButton.addEventListener('click', () => {
+  const pixels = outerContainer.querySelectorAll('.pixel');
+  pixels.forEach((pixel) => (pixel.style.backgroundColor = ''));
+});
+
+// Toggle to color mode
+colorModeButton.addEventListener('click', () => {
+  currentMode = 'color';
+  colorModeButton.classList.add('active');
+  blackModeButton.classList.remove('active');
+});
+
+// Toggle to black mode
+blackModeButton.addEventListener('click', () => {
+  currentMode = 'black';
+  blackModeButton.classList.add('active');
+  colorModeButton.classList.remove('active');
+});
+
+// Set
+setGridSizeButton.addEventListener('click', setGridSize);
+
+// ========== Initial Load ==========
+generatePixels(16); // Default 16x16 grid
