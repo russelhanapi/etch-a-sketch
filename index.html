@@ -4,10 +4,67 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Etch-a-Sketch</title>
-
     <link rel="stylesheet" href="style.css" />
+    <title>Scribbl Sketch</title>
     <script defer src="script.js"></script>
   </head>
-  <body></body>
+  <body>
+    <p class="instruction">
+      Click the
+      <span
+        ><img src="/assets/logo.webp" class="instruction-app-logo" alt="logo"
+      /></span>
+      icon to set the grid size.
+    </p>
+
+    <div class="app-container">
+      <div class="etch-a-sketch">
+        <div class="etch-a-sketch-content">
+          <div class="header">
+            <button
+              class="button-set-grid-size"
+              title="Set grid size"
+              aria-label="Set grid size"
+            >
+              <img class="app-logo" src="/assets/logo.png" alt="logo" />
+            </button>
+            <h1 class="app-title">Scribbl Sketch</h1>
+          </div>
+          <div class="drawing-screen">
+            <button
+              class="clear-button"
+              title="Clear Drawing"
+              aria-label="Clear drawing"
+            >
+              <ion-icon name="refresh-outline"></ion-icon>
+            </button>
+          </div>
+          <div class="button-group">
+            <button
+              class="control-button color-mode"
+              title="Colored Ink"
+              aria-label="Color ink"
+            >
+              <ion-icon name="color-palette-outline"></ion-icon>
+            </button>
+            <button
+              class="control-button black-mode active"
+              title="Black Ink"
+              aria-label="Black ink"
+            >
+              <ion-icon name="brush-outline"></ion-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
+  </body>
 </html>
